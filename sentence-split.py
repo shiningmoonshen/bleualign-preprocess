@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import sys
 alphabets= "([A-Za-z])"
 prefixes = "(Mr|St|Mrs|Ms|Dr)[.]"
 suffixes = "(Inc|Ltd|Jr|Sr|Co)"
@@ -8,14 +9,16 @@ acronyms = "([A-Z][.][A-Z][.](?:[A-Z][.])?)"
 websites = "[.](com|net|org|io|gov)"
 digits = "([0-9])"
 
-def by_sentence(file_name):
+def main():
     #opens source file and rewrites file with each sentence having a new line
-    f = open(file_name, "w")
-    sentences_as_lst = split_into_sentences(f)
+    f = open(sys.argv[1], "r")
+    new = open("output.txt", "w")
+    sentences_as_lst = split_into_sentences(f.read())
     for line in sentences_as_lst:
-        f.write(f"{line}\n")
+        new.write(line + "\n")
     f.close()
-    return f
+    new.close()
+    return new
 
 def split_into_sentences(text):
     text = " " + text + "  "
@@ -47,3 +50,6 @@ def split_into_sentences(text):
     sentences = sentences[:-1]
     sentences = [s.strip() for s in sentences]
     return sentences
+
+
+main()

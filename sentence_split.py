@@ -24,7 +24,6 @@ def split_into_sentences(text):
     text = " " + text + "  "
     #get rid of indentation
     text = text.replace("    ", "")
-    print(text)
     text = text.replace("\n\n", "<nline>")
     text = text.replace("\n"," ")
     text = re.sub(prefixes,"\\1<prd>",text)
@@ -55,7 +54,7 @@ def split_into_sentences(text):
     #switch all placeholder periods back to "."
     text = text.replace("<prd>",".")
     text = text.replace("<nline>", "\n")
-    text = text.replace("\' ", "\'\n")
+    text = text.replace("’ ", "’\n")
     sentences = text.split("<stop>")
     sentences = sentences[:-1]
     temp = []
@@ -64,7 +63,6 @@ def split_into_sentences(text):
         if stripped != '':
             temp.append(stripped)
     sentences = temp
-    print(sentences[0:6])
     return sentences
 
 
